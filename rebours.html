@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte à rebours de 48 heures</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+        .countdown {
+            font-size: 2rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown" id="countdown">48:00:00</div>
+
+    <script>
+        // Initialisation du compte à rebours à 48 heures
+        let countdownDuration = 48 * 60 * 60; // 48 heures en secondes
+
+        function updateCountdown() {
+            // Conversion en heures, minutes, secondes
+            let hours = Math.floor(countdownDuration / 3600);
+            let minutes = Math.floor((countdownDuration % 3600) / 60);
+            let seconds = countdownDuration % 60;
+
+            // Formatage pour afficher toujours deux chiffres
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            // Affichage du compte à rebours
+            document.getElementById("countdown").textContent = `${hours}:${minutes}:${seconds}`;
+
+            // Décrémentation
+            countdownDuration--;
+
+            // Arrêter le compte à rebours lorsqu'il atteint zéro
+            if (countdownDuration < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown").textContent = "Temps écoulé";
+            }
+        }
+
+        // Mise à jour toutes les secondes
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
